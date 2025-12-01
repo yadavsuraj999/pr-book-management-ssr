@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management System</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <%- include("./partials/header.ejs") %>
+
+        <div class="" id="add">
+            <h2><i class="fas fa-plus-circle"></i> Add New Book</h2>
+
+            <form action="/addbook" method="POST">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> Book Name</label>
+                            <input type="text" class="form-control" name="bookName" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Author Name</label>
+                            <input type="text" class="form-control" name="authorName" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><i class="fas fa-tag"></i> Genre</label>
+                            <input type="text" class="form-control" name="genre" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar"></i> Publication Date</label>
+                            <input type="date" class="form-control" name="date" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><i class="fas fa-dollar-sign"></i> Price</label>
+                            <input type="number" class="form-control" name="price" required>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary"><i class="fas fa-save"></i> Add Book</button>
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
