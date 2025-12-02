@@ -8,69 +8,77 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
-
-
 </head>
 
 <body>
 
     <div class="main-container">
         <%- include("./partials/header.ejs") %>
-        <div class="" id="view">
-            <h2><i class="fas fa-list-alt"></i> View Books</h2>
+            <div class="m-5 pt-5" id="view">
+                <h2><i class="fas fa-list-alt"></i> View Books</h2>
 
-            <div class="stats-container">
-                <div class="stat-box">
-                    <h3>3</h3>
-                    <p>Total Books</p>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <h3>
+                            <%=newBook.length%>
+                        </h3>
+                        <p>Total Books</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <% let totalValue=newBook.reduce((sum, book)=> sum + parseFloat(book.price), 0); %>
+                            <h3>$<%= totalValue %></h3>
+                            <p>Total Value</p>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <h3>3</h3>
-                    <p>Total Authors</p>
-                </div>
-                <div class="stat-box">
-                    <h3>$37</h3>
-                    <p>Total Value</p>
+
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><i class="fas fa-book"></i> Book Name</th>
+                                <th class="text-center"><i class="fas fa-user"></i> Author</th>
+                                <th class="text-center"><i class="fas fa-tag"></i> Genre</th>
+                                <th class="text-center"><i class="fas fa-calendar"></i> Date</th>
+                                <th class="text-center"><i class="fas fa-calendar"></i> Language</th>
+                                <th class="text-center"><i class="fas fa-calendar"></i> IsDiscount</th>
+                                <th class="text-center"><i class="fas fa-dollar-sign"></i> Price</th>
+                                <th class="text-center"><i class="fas fa-dollar-sign"></i> Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% newBook.map((book)=>{ %>
+                                <tr class="text-center">
+                                    <td>
+                                        <%= book.bookName %>
+                                    </td>
+                                    <td>
+                                        <%= book.authorName %>
+                                    </td>
+                                    <td>
+                                        <%= book.genre %>
+                                    </td>
+                                    <td>
+                                        <%= book.date %>
+                                    </td>
+                                    <td>
+                                        <%= book.language %>
+                                    </td>
+                                    <td>
+                                        <%= book.isDiscount %>
+                                    </td>
+                                    <td>
+                                        <%= book.price %>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger">delete</button>
+                                        <a href="" class="btn btn-success">edit</a>
+                                    </td>
+                                    <%}) %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-
-            <div class="table-wrapper">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-book"></i> Book Name</th>
-                            <th><i class="fas fa-user"></i> Author</th>
-                            <th><i class="fas fa-tag"></i> Genre</th>
-                            <th><i class="fas fa-calendar"></i> Date</th>
-                            <th><i class="fas fa-dollar-sign"></i> Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>The Alchemist</td>
-                            <td>Paulo Coelho</td>
-                            <td>Adventure</td>
-                            <td>1988-04-14</td>
-                            <td>$10</td>
-                        </tr>
-                        <tr>
-                            <td>Rich Dad Poor Dad</td>
-                            <td>Robert Kiyosaki</td>
-                            <td>Finance</td>
-                            <td>1997-05-01</td>
-                            <td>$12</td>
-                        </tr>
-                        <tr>
-                            <td>Atomic Habits</td>
-                            <td>James Clear</td>
-                            <td>Self-help</td>
-                            <td>2018-10-16</td>
-                            <td>$15</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
