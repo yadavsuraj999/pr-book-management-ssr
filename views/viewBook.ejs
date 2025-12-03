@@ -27,7 +27,8 @@
 
                     <div class="stat-box">
                         <% let totalValue=newBook.reduce((sum, book)=> sum + parseFloat(book.price), 0); %>
-                            <h3>$<%= totalValue %></h3>
+                            <h3>$<%= totalValue %>
+                            </h3>
                             <p>Total Value</p>
                     </div>
                 </div>
@@ -71,8 +72,8 @@
                                         <%= book.price %>
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger">delete</button>
-                                        <a href="" class="btn btn-success">edit</a>
+                                        <a href="/deleteBook?deleteId=<%= book._id %>" class="btn btn-danger">delete</a>
+                                        <a href="/editBook?editId=<%=book._id%>" class="btn btn-success">edit</a>
                                     </td>
                                     <%}) %>
                         </tbody>

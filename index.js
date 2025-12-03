@@ -23,8 +23,7 @@ app.get("/addbook", (req, res) => {
 
 app.get("/viewbook", async (req, res) => {
     const newBook = await Books.find({})
-    // console.log(newBook);
-    res.render("viewbook", {newBook})
+    res.render("viewbook", { newBook })
 })
 
 app.post("/addbook", async (req, res) => {
@@ -38,6 +37,41 @@ app.post("/addbook", async (req, res) => {
         console.log(error);
     }
 })
+
+app.get("/deleteBook", async (req, res) => {
+    console.log(req.query);
+    const bookId = req.query.deleteId
+    try {
+        await Books.findByIdAndDelete(bookId)
+        res.redirect("/viewbook")
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+app.get("/editBook", async (req, res) => {
+    const editid = req.query.editId
+    try {
+        const editbook = await Books.findById(editid)
+        res.render("editBook", { editbook })
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+app.post("/editBook", async (req, res) => {
+    console.log(req.body);
+    console.log(req.query.editId);
+    const book = req.body
+    const bookquery = req.query.editId
+    try {
+        await Books.findByIdAndUpdate(bookquery, book)
+        res.redirect("/viewbook")
+    } catch (error) {
+
+    }
+})
+
 
 
 app.listen(PORT, () => {
