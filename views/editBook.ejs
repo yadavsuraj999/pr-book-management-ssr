@@ -5,129 +5,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Management System</title>
-
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-
     <div class="main-container">
-
         <%- include("./partials/header.ejs") %>
+        <div class="m-5 pt-5" id="add">
+            <h2><i class="fas fa-plus-circle"></i> Update Book</h2>
+            <form action="/editBook?editId=<%= editbook._id %>" method="POST">
 
-            <div class="m-5 pt-5" id="add">
-                <h2><i class="fas fa-plus-circle"></i> Update Book</h2>
-
-                <form action="/editBook?editId=<%= editbook._id %>" method="POST">
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><i class="fas fa-book"></i> Book Name</label>
-                                <input type="text" class="form-control" name="bookName" value="<%= editbook.bookName %>"
-                                    required>
-                            </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> Book Name</label>
+                            <input type="text" class="form-control" name="bookName" value="<%= editbook.bookName %>" required>
                         </div>
+                    </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label><i class="fas fa-user"></i> Author Name</label>
-                                <input type="text" class="form-control" name="authorName"
-                                    value="<%= editbook.authorName %>" required>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Author Name</label>
+                            <input type="text" class="form-control" name="authorName" value="<%= editbook.authorName %>" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row  my-4">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><i class="fas fa-tag"></i> Genre</label>
+                            <input type="text" class="form-control" name="genre" value="<%= editbook.genre %>" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar"></i> Publication Date</label>
+                            <input type="date" class="form-control" name="date" value="<%= editbook.date %>" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label><i class="fas fa-dollar-sign"></i> Price</label>
+                            <input type="number" class="form-control" name="price" value="<%= editbook.price %>" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="form-group  pe-5">
+                        <label><i class="fas fa-language"></i> Language</label>
+                        <div class="d-flex align-items-center mt-2">
+                            <div class="form-check me-4">
+                                <input <%= editbook.language == "Hindi" ? "checked" : "" %> class="form-check-input" type="radio" name="language" id="hindi" value="Hindi" required>
+                                <label class="form-check-label" for="hindi">Hindi</label>
+                            </div>
+
+                            <div class="form-check me-4">
+                                <input <%= editbook.language == "Gujarati" ? "checked" : "" %> class="form-check-input" type="radio" name="language" id="gujarati" value="Gujarati">
+                                <label class="form-check-label" for="gujarati">Gujarati</label>
+                            </div>
+
+                            <div class="form-check me-4">
+                                <input <%= editbook.language == "English" ? "checked" : "" %> class="form-check-input" type="radio" name="language" id="english" value="English">
+                                <label class="form-check-label" for="english">English</label>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label><i class="fas fa-tag"></i> Genre</label>
-                                <input type="text" class="form-control" name="genre" value="<%= editbook.genre %>"
-                                    required>
+                    <div class="form-group ">
+                        <label><i class="fas fa-tags"></i> Is Discount Available?</label>
+                        <div class="d-flex align-items-center mt-2">
+                            <div class="form-check me-4">
+                                <input <%= editbook.isDiscount == "Yes" ? "checked" : "" %> class="form-check-input" type="radio" name="isDiscount" id="discountYes" value="Yes" required>
+                                <label class="form-check-label" for="discountYes">Yes</label>
                             </div>
-                        </div>
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label><i class="fas fa-calendar"></i> Publication Date</label>
-                                <input type="date" class="form-control" name="date" value="<%= editbook.date %>"
-                                    required>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label><i class="fas fa-dollar-sign"></i> Price</label>
-                                <input type="number" class="form-control" name="price" value="<%= editbook.price %>"
-                                    required>
+                            <div class="form-check me-4">
+                                <input <%= editbook.isDiscount == "No" ? "checked" : "" %> class="form-check-input" type="radio" name="isDiscount" id="discountNo" value="No">
+                                <label class="form-check-label" for="discountNo">No</label>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="d-flex ">
-                        <div class="form-group mt-3 pe-5">
-                            <label><i class="fas fa-language"></i> Language</label>
-
-                            <div class="d-flex align-items-center mt-2">
-                                <div class="form-check mr-4">
-                                    <input <%=editbook.language=="Hindi" ? "checked" : "" %> class="form-check-input"
-                                    type="radio"
-                                    name="language"
-                                    id="hindi"
-                                    value="Hindi" required>
-                                    <label class="form-check-label" for="hindi">Hindi</label>
-                                </div>
-
-                                <div class="form-check mr-4">
-                                    <input <%=editbook.language=="Gujarati" ? "checked" : "" %> class="form-check-input"
-                                    type="radio"
-                                    name="language" id="gujarati"
-                                    value="Gujarati">
-                                    <label class="form-check-label" for="gujarati">Gujarati</label>
-                                </div>
-
-                                <div class="form-check mr-4">
-                                    <input <%=editbook.language=="English" ? "checked" : "" %> class="form-check-input"
-                                    type="radio" name="language"
-                                    id="english"
-                                    value="English">
-                                    <label class="form-check-label" for="english">English</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group mt-3">
-                            <label><i class="fas fa-tags"></i> Is Discount Available?</label>
-
-                            <div class="d-flex align-items-center mt-2">
-                                <div class="form-check mr-4">
-                                    <input <%=editbook.isDiscount=="Yes" ? "checked" : "" %> class="form-check-input"
-                                    type="radio" name="isDiscount" id="discountYes"
-                                    value="Yes" required>
-                                    <label class="form-check-label" for="discountYes">Yes</label>
-                                </div>
-
-                                <div class="form-check mr-4">
-                                    <input <%=editbook.isDiscount=="No" ? "checked" : "" %> class="form-check-input"
-                                    type="radio" name="isDiscount" id="discountNo"
-                                    value="No">
-                                    <label class="form-check-label" for="discountNo">No</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-primary">
-                        <i class="fas fa-save"></i> Update Book
-                    </button>
-                </form>
-
-            </div>
-
+                <button class="btn btn-primary mt-3">
+                    <i class="fas fa-save"></i> Update Book
+                </button>
+            </form>
+        </div>
     </div>
 
+    <script>
+        document.querySelectorAll("form").forEach(form => {
+            form.addEventListener("submit", function (e) {
+                const requiredFields = form.querySelectorAll("[required]");
+                let valid = true;
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        valid = false;
+                    }
+                });
+
+                if (!valid) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: "error",
+                        title: "Missing Required Fields",
+                        text: "Please fill all required fields before submitting",
+                        confirmButtonColor: "#3498db"
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Form Submitted Successfully!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
